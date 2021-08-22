@@ -1,0 +1,95 @@
+html,
+body {
+    z-index:-1;
+    position:relative;
+    height: 100%;
+    margin: 0;
+    background-color: rgba(248, 248, 248, 1);
+    font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+.side {
+    z-index:2;
+    float: left;
+  position:fixed;
+    color: white;
+    width: 250px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FF8E99;
+}
+.inner {
+    padding: 20px;
+}
+.mainmenu {
+    z-index:4;
+    border: 0;
+    margin: 60px 0;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 18px;
+}
+.side button {
+    color: white;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+.header {
+  position:absolute;
+    width:100%;
+    z-index:1;
+    background-color: white;
+    height: 40px;
+}
+.header .search{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    display: flex;
+}
+
+.form {
+  margin:0 0 0 250px;
+  padding:80px 0 0 0;
+    z-index:0;
+  text-align:center;
+}
+.form span {
+  color:black;
+    width: 100px;
+    text-align: left;
+}
+.form div{
+    display:inline-block;
+    width:100px;
+    text-align:right;
+}
+#circle {
+  margin:0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    left: 10px;
+    border: 2px solid black;
+    /* background-image: 머시기 저시기 */
+}
+.form button {
+  border:none;
+  background-color:transparent;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:italic;
+}
+.header button {
+  border:none;
+  background-color:transparent;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:italic;
+}
