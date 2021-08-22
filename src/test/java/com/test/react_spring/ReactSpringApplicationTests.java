@@ -1,13 +1,13 @@
-package com.test.react_spring;
+// package com.test.react_spring;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ReactSpringApplicationTests {
+// @SpringBootTest
+// class ReactSpringApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+//     @Test
+//     void contextLoads() {
+//     }
 
-}
+// }
