@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="join.css">
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+<span class="tab">&#9;</span>
+<section>
+    <h1 style="font-style:italic; color:white; font-family:Arial, Helvetica, sans-serif;font-size:30px;">Welcome!</h1>
+</section>
+<div class="bg">
+<section class="form">
+<form th:action="@{/signUp}" method="post" modelAttribute="memberForm">
+    <span style="white-space:pre">ID</span>
+    <input type="text" name="userId"/><br><br>
+
+    <span style="white-space:pre">비밀번호</span>
+    <input type="password" name="password" value="123456"/><br><br>
+
+    <span style="white-space:pre">비밀번호 확인</span>
+    <input type="password" value="123456"/><br><br>
+
+    <span style="white-space:pre">이름</span>
+    <input type="text" name="name" /><br><br>
+
+    <span style="white-space:pre">생일</span>
+    <input type="date" name="birth"/><br><br>
+
+    <span style="white-space:pre">이메일</span>
+    <input type="email" name="email" placeholder="email@gmail.com"/><br><br>
+    <br><br>
+<div style="width:80px;float: right;">
+<input type="submit" name="Join!"/>
+</div>
+</form>
+</section>
+</div>
+</body>
+</html>

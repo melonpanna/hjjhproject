@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My page</title>
+    <link rel="stylesheet" th:href="@{/css/myPage.css}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <script src="/main.js"></script>
+    <style type="text/css">
+        a {
+            color: white;
+            text-decoration: none
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="search">
+            <i class="material-icons">search</i>
+            <input type="text">
+            <button>GO!</button>
+        </div>
+    </div>
+    <div class="side">
+        <div class="inner">
+            <span
+                style="margin:20px 0; font-family: Arial, Helvetica, sans-serif; font-style:italic; font-size:20px;">Board</span><br />
+            <div class="mainmenu">
+                <button>▶ 캘린더</button><br /><br />
+                <div>
+                    <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"style="transition:1s;">
+                        ▶ 공유 다이어리
+                        </a><div style="DISPLAY: none;">
+                        <ul>
+                            <li>여름방학</li>
+                            <li>가을학기</li>
+                        </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div id="circle">
+        </div>
+        <br /><br/>
+        <div><span style="white-space:pre">ID</span></div>
+        <!-- 여기에는 기존 아이디 -->
+        <div style="width:170px;text-align:center;"><span>choisoobin</span></div>
+        <br /><br />
+        <div><span style="white-space:pre">비밀번호</span></div>
+        <input type="password" name="user_PW1" value="123456"><br><br>
+        <div><span style="white-space:pre">비밀번호 확인</span></div>
+        <input type="password" name="user_PW2" value="123456"><br><br>
+      <div><span style="white-space:pre">이름</span></div>
+        <input type="text" name="user_name" value=""> <br><br>
+        <div><span style="white-space:pre">생일</span></div>
+        <div style="width:170px;text-align:left;">
+            <select name="month">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select name="day">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+        </div>
+        <br><br>
+        <div><span style="white-space:pre">이메일</span></div>
+        <input type="email" name="user_email" placeholder="email@gmail.com"><br><br>
+        <div style="width:80px;display:inline-block;">
+            <button>Edit</button>
+        </div>
+    </div>
+</body>
+
+</html>
