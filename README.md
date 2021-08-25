@@ -14,13 +14,16 @@
 .html<br>
 src/resources/templates<br>
 </div>
+<br>
 
 <div>
 .css<br>
 src/resources/static/css<br>
 </div>
+<br>
 
 <div>  
 이미지<br>
 src/resources/static/images<br>
 </div>
+<br>
