@@ -1,6 +1,6 @@
 body {
     /* 왜 이걸 relative로 설정하면 이상하게 되지??!! */
-    background-image: url('../images/cloud.jpg');
+    background-image: url('https://images.unsplash.com/photo-1587947910798-fb4e9a0452cc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     background-repeat : no-repeat;
     background-size : cover;
 }
