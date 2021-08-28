@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hjjhproject</title>
 </head>
 
 <body>
   <div class="box">
-    <form th:action="@{/authenticate}" method="post" modelAttribute="loginForm">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-      <div class="form">
+    <div class="form">
       <div class="idForm">
         <span>ID</span>
-        <input type="text" class="id" name="userId" placeholder="ID">
+        <input type="text" class="id" placeholder="ID">
       </div>
       <div class="passForm">
         <span>PASSWORD</span>
-        <input type="password" class="pw" name="password" placeholder="PW">
+        <input type="password" class="pw" placeholder="PW">
       </div><br><br>
+      <button type="button" class="btn">Find ID</button>
+      <button type="button" class="btn">Find PW</button>
         <button type="button" class="btn">Join</button>
-<!--        <button type="button" class="btn">GO!</button>-->
-       <input type="submit" class="btn" value="GO!">
+        <button type="button" class="btn" style="color:royalblue;">GO!</button>
     </div>
-    </form>
   </div>
 </body>
 </html>
