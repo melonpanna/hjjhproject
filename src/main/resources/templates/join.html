@@ -13,9 +13,10 @@
 </section>
 <div class="bg">
 <section class="form">
-<form th:action="@{/signUp}" method="post" modelAttribute="memberForm">
+<form th:action="@{/join}" method="post" modelAttribute="memberForm">
     <span style="white-space:pre">ID</span>
-    <input type="text" name="userId"/><br><br>
+    <input type="text" name="userId" th:value="${memberForm.userId}"/><br><br>
+
 
     <span style="white-space:pre">비밀번호</span>
     <input type="password" name="password" value="123456"/><br><br>
@@ -24,13 +25,14 @@
     <input type="password" value="123456"/><br><br>
 
     <span style="white-space:pre">이름</span>
-    <input type="text" name="name" /><br><br>
+    <input type="text" name="name" th:value="${memberForm.name}"/><br><br>
 
     <span style="white-space:pre">생일</span>
-    <input type="date" name="birth"/><br><br>
+    <input type="date" name="birth" th:value="${memberForm.birth}"/><br><br>
 
     <span style="white-space:pre">이메일</span>
-    <input type="email" name="email" placeholder="email@gmail.com"/><br><br>
+    <input type="email" name="email" placeholder="email@gmail.com" th:value="${memberForm.email}"/><br><br>
+<!--    <p th:text="${valid_email}"></p>-->
     <br><br>
 <div style="width:80px;float: right;">
 <input type="submit" name="Join!"/>
