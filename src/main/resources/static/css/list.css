@@ -1,0 +1,171 @@
+html,
+body {
+  z-index: -1;
+  position: relative;
+  height: 100%;
+  margin: 0;
+  background-color: rgba(248, 248, 248, 1);
+  font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+}
+
+.side {
+  z-index: 2;
+  float: left;
+  position: fixed;
+  color: white;
+  width: 250px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #FF8E99;
+}
+
+.inner {
+  padding: 20px;
+}
+
+.mainmenu {
+  z-index: 10;
+  border: 0;
+  margin: 60px 0;
+  padding: 10px;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.side button {
+  color: white;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+  height: 40px;
+}
+
+.header .search {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+}
+
+#form {
+  z-index:3;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 250px;
+  padding: 40px 0 0 0;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  /* justify-content: space-between; */
+}
+
+#form #selectMonth {
+  display: flex;
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+#form #selectMonth button {
+  background-color: transparent;
+  border: none;
+  width: 50px;
+  height: 100%;
+}
+
+/* #form #selectMonth input[type=date] {
+  background-color: transparent;
+  border: none;
+  font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  text-align: center;
+} */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+#form #view {
+  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post {
+  /* border:2px solid pink; */
+  width: 100%;
+  height:60px;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+.post .uploadPhoto {
+  height:inherit;
+  /* border:2px solid blue; */
+}
+.post .content {
+  display:flex;
+  width: 35%;
+  height:inherit;
+  text-align:left;
+  align-items:center;
+}
+.post .userInfo {
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 30px;
+}
+.post .imageContainer {
+  height:40px;
+  width:40px;
+  border-radius:70%;
+  overflow:hidden;
+}
+.post .userImage {
+  /* border:2px solid red; */
+  height:100%;
+  width:100%;
+  object-fit: cover;
+}
+.post .userInfo .userName {
+  padding:0 15px;
+}
+
+.post input[type=date] {
+  text-align: center;
+  font-style:italic;
+  border: none;
+  background-color: transparent;
+  font-family: 'IBM Plex Sans KR', Arial, Helvetica, sans-serif;
+}
+.post input:focus{
+  outline:none;
+}
+
+#view button {
+  border: none;
+  background-color: transparent;
+}
+#currentDate {
+  display:flex;
+  flex-direction:column;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:italic;
+}
+#currentDate #month {
+  font-size:22px;
+}
