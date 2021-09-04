@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="infinteScroll.css">
+    <script src="infinteScroll.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <style type="text/css">
+        a {
+            color: white;
+            text-decoration: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="search">
+            <i class="material-icons">search</i>
+            <input type="text">
+            <button>GO!</button>
+        </div>
+    </div>
+    <div class="side">
+        <div class="inner">
+            <span
+                style="margin:20px 0; font-family: Arial, Helvetica, sans-serif; font-style:italic; font-size:20px;">Board</span><br />
+            <div class="mainmenu">
+                <button>▶ 캘린더</button><br /><br />
+                <div>
+                    <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
+                        href="javascript:void(0)" style="transition:1s;" style="color:white;">
+                        ▶ 공유 다이어리
+                    </a>
+                    <div style="DISPLAY: none;">
+                        <ul>
+                            <li>여름방학</li>
+                            <li>가을학기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div class="dateFix">
+            <div class="dateContainer">
+                <input type="date">
+            </div>
+        </div>
+        <div id="selectDay">
+            <button class="leftBtn" onclick="leftClick();">◀</button>
+            <div id="currentDate">
+                <span id="year"></span>
+                <span id="month"></span>
+                <span id="day"></span>
+            </div>
+            <!-- <input id="searchDate" type="date"> -->
+            <button class="rightBtn" onclick="rightClick();">▶</button>
+        </div>
+
+        <div class="info">
+            <div class="profile">
+                <div class="imageContainer">
+                    <img class="userImage" src="" alt="">
+                </div>
+                <span class="userName">면정</span>
+                <span class="place">@가평</span>
+                <span class="taggedInfo">with지선</span>
+            </div>
+            <div class="weather">
+                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="">
+            </div>
+        </div>
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1515914623901-4f99b91cb28b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+                alt="oceanNight">
+        </div>
+        <div class="content">
+            <form action=""></form>
+        </div>
+        <div class="comment">
+            <div class="commentInfo">
+                <div class="imageContainer">
+                    <img class="commentUserImage" src="" alt="">
+                </div>
+                <div> <span class="commentUserName">정현</span>
+                </div>
+            </div>
+            <form class="commentForm" action="">가나다</form>
+            <div class="timeContainer">
+                <span class="recordedTime"></span>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
