@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calender</title>
+    <link rel="stylesheet" href="/calender.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <style type="text/css">
+        a {
+            color: white;
+            text-decoration: none
+        }
+    </style>
+    <!-- <script src="/calender.js"></script> -->
+</head>
+
+<body>
+    <div class="header">
+        <div class="search">
+            <i class="material-icons">search</i>
+            <input type="text">
+            <button>GO!</button>
+        </div>
+    </div>
+    <div class="side">
+        <div class="inner">
+            <span
+                style="margin:20px 0; font-family: Arial, Helvetica, sans-serif; font-style:italic; font-size:20px;">Board</span><br />
+            <div class="mainmenu">
+                <button>▶ 캘린더</button><br /><br />
+                <div>
+                    <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
+                        href="javascript:void(0)" style="transition:1s;" style="color:white;">
+                        ▶ 공유 다이어리
+                    </a>
+                    <div style="DISPLAY: none;">
+                        <ul>
+                            <li>여름방학</li>
+                            <li>가을학기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div id="selectDate">
+            <input type="date" id="customDate" onchange="customDate()">
+        </div>
+        <div id="banner">
+            <div id="imageContainer">
+                <img src="https://images.unsplash.com/photo-1629031662322-486399584436?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+                    alt="">
+            </div>
+            <div id="selectMonth">
+                <button class="leftBtn" onclick="leftClick();">◀</button>
+                <div id="currentDate">
+                    <span id="year"></span>
+                    <span id="month"></span>
+                </div>
+                <button class="rightBtn" onclick="rightClick();">▶</button>
+            </div>
+        </div>
+        <div class="calender">
+            <table class="weekdays">
+                <tr>
+                    <th>SUN</th>
+                    <th>MON</th>
+                    <th>TUE</th>
+                    <th>WED</th>
+                    <th>THU</th>
+                    <th>FRI</th>
+                    <th>SAT</th>
+                </tr>
+            </table>
+            <table class="days">
+
+            </table>
+        </div>
+    </div>
+    <script>
+        let today;
+        let month;
+        let year;
+        let day;
+        // 달력 설정용 변수
+        let firstDay;
+        let lastDay;
+        let startDay;
+        var days = document.getElementsByClassName("days")[0];
+
+        function getLastDay(year, month) {
+            var lastDay = new Date(year, month + 1);
+            lastDay.setDate(0);
+            return lastDay.getDate();
+        }
+
+        function getStartDay(year, month) {
+            var date = new Date(year, month);
+            return date.getDay();
+        }
+
+        function printCalender(year, month) {
+            days.innerHTML = "";
+
+            var lastDay = getLastDay(year, month - 1);
+            var startDay = getStartDay(year, month - 1);
+            for (let i = 0; i < startDay; i++) {
+                var td_date = document.createElement("td");
+                td_date.innerHTML=" ";
+                days.appendChild(td_date);
+            }
+            for (let i = 1; i <= lastDay; i++) {
+                var td_date = document.createElement("td");
+                td_date.innerHTML=i;
+                days.appendChild(td_date);
+            }
+        }
+        // 왼쪽, 오른쪽 버튼을 클릭하면 월이 바뀜
+        function leftClick() {
+            if (month === 1) {
+                month = 12;
+                year -= 1;
+            } else {
+                month -= 1;
+            }
+            document.getElementById("month").innerHTML = month.toString();
+            document.getElementById("year").innerHTML = year.toString();
+            printCalender(year, month)
+        }
+
+        function rightClick() {
+            if (month === 12) {
+                month = 1;
+                year += 1;
+            } else {
+                month += 1;
+            }
+            document.getElementById("month").innerHTML = month.toString();
+            document.getElementById("year").innerHTML = year.toString();
+            printCalender(year, month)
+        }
+
+        function customDate() {
+            let searchDate = document.querySelector("#customDate").value
+            let arr = searchDate.split('-')
+            year = arr[0];
+            month = arr[1];
+            day = arr[2];
+            if (month[0] === '0') month = month[1];
+            if (day[0] === '0') month = day[1];
+            document.getElementById("month").innerHTML = month;
+            document.getElementById("year").innerHTML = year;
+            printCalender(year, month)
+        }
+        window.onload = function () {
+            today = new Date();
+            month = today.getMonth() + 1;
+            year = today.getFullYear();
+            console.log(month);
+            console.log(year);
+            document.getElementById("month").innerHTML = month.toString();
+            document.getElementById("year").innerHTML = year.toString();
+            //달력 만들기
+            printCalender(year, month)
+        }
+    </script>
+</body>
+
+</html>
