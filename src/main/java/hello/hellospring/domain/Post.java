@@ -13,26 +13,34 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+//@Table(name="post")
+@Table(name="bufpost")
+
 public class Post {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Min(value=1)
-    private Long categoryId;
+//    @Min(value=1)
+//    private Long category_id;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="categoryId",insertable = false,updatable = false)
-    private Category category;
+//    @ManyToOne
+//    @JoinColumn(name="category_id")
+//    private Category category;
+
+    @Column
+    private String name;    //작성자 이름
 
     @Size(min=1,max=100)
-    @Column(nullable = false)
+    @Column(name="title", nullable = false)
     private String title;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(name="regDate")
     private Date regDate;
 
+    @Column
     private String contents;
 
 }

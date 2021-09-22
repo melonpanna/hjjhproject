@@ -1,7 +1,9 @@
 package hello.hellospring.service;
 
 import hello.hellospring.controller.MemberForm;
+import hello.hellospring.domain.Category;
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.CategoryRepository;
 import hello.hellospring.repository.MemberRepository;
 //import hello.hellospring.repository.MemoryMemberRepository;
 import org.slf4j.Logger;
@@ -26,6 +28,8 @@ public class MemberService implements UserDetailsService {
 
     //repository
     private final MemberRepository memberRepository;                  ////////
+    private CategoryRepository categoryRepository;
+
     public MemberService(MemberRepository memberRepository) {                  ////////
         this.memberRepository = memberRepository;
     }
@@ -70,7 +74,15 @@ public class MemberService implements UserDetailsService {
 
         logger.info("new password : "+member.getPassword());
         logger.info("Save : " + member.getUsername());
-        memberRepository.save(member);//중복회원이 아닐 경우 저장
+        member=memberRepository.save(member);//중복회원이 아닐 경우 저장
+        logger.info("Save id : " + member.getId());
+
+        //category 추가
+//        Category category = Category.builder()
+//                .id(member.getId())
+//                .userId(member.getUsername())
+//                .build();
+//        categoryRepository.save(category);
         return member.getId();                                         ////////
     }
 

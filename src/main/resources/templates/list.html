@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/list.css">
-    <script src="/list.js"></script>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <script th:src="@{/js/list.js}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&display=swap" rel="stylesheet">
@@ -21,70 +22,69 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="search">
-            <i class="material-icons">search</i>
-            <input type="text">
-            <button>GO!</button>
-        </div>
+<div class="header">
+    <div class="search">
+        <i class="material-icons">search</i>
+        <input type="text">
+        <button>GO!</button>
     </div>
-    <div class="side">
-        <div class="inner">
+</div>
+<div class="side">
+    <div class="inner">
             <span
-                style="margin:20px 0; font-family: Arial, Helvetica, sans-serif; font-style:italic; font-size:20px;">Board</span><br />
-            <div class="mainmenu">
-                <button>▶ 캘린더</button><br /><br />
-                <div>
-                    <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
-                        href="javascript:void(0)" style="transition:1s;">
-                        ▶ 공유 다이어리
-                    </a>
-                    <div style="DISPLAY: none;">
-                        <ul>
-                            <li>여름방학</li>
-                            <li>가을학기</li>
-                        </ul>
-                    </div>
+                    style="margin:20px 0; font-family: Arial, Helvetica, sans-serif; font-style:italic; font-size:20px;">Board</span><br />
+        <div class="mainmenu">
+            <button>▶ 캘린더</button><br /><br />
+            <div>
+                <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
+                   href="javascript:void(0)" style="transition:1s;">
+                    ▶ 공유 다이어리
+                </a>
+                <div style="DISPLAY: none;">
+                    <ul>
+                        <li>여름방학</li>
+                        <li>가을학기</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 여기서부터 목록 -->
-    <div id="form" action="">
-        <div id="selectMonth">
-            <button class="leftBtn" onclick="leftClick();">◀</button>
-            <div id="currentDate">
-                <span id="year"></span>
-                <span id="month"></span>
-            </div>
-            <!-- <input id="searchDate" type="date"> -->
-            <button class="rightBtn" onclick="rightClick();">▶</button>
+</div>
+<!-- 여기서부터 목록 -->
+<div id="form" action="">
+    <div id="selectMonth">
+        <button class="leftBtn" onclick="leftClick();">◀</button>
+        <div id="currentDate">
+            <span id="year"></span>
+            <span id="month"></span>
+        </div>
+        <!-- <input id="searchDate" type="date"> -->
+        <button class="rightBtn" onclick="rightClick();">▶</button>
 
-        </div>
-        <div id="view">
-            <button id="largeView"><i class="material-icons">check_box_outline_blank</i>
-            </button>
-            <button id="gridView"><i class="material-icons">grid_view</i></button>
-            <button id="listView"><i class="material-icons">reorder</i></button>
-        </div>
-        <table id="list">
-            <tr>
-                <div class="post">
-                    <div><input type="date" id="postDate"></div>
-                    <img class="uploadPhoto" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMTFfNTcg%2FMDAxNjA1MDYzODg0NzM5.t4q7wULuo58K89j3plJ2JqT1v689-6eSUy-oOI5eEnUg.caBEREfz5Nryh4P2w338Z71tUq6KCA32niyPfuDuFQkg.JPEG.dhfal123%2FKakaoTalk_20201111_115001557.jpg&type=sc960_832" alt="빼빼로">
-                    <form class="content" action="">여기에는 내용을 적어요</form>
-                    <div class="userInfo">
-                        <div class="imageContainer">
-                            <img class="userImage" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzAzMTVfOTEg%2FMDAxNDg5NTgyMTk1NTU4.94Vuz03eHD7MyUBumsY3mNB8cDJd9UNBeF-ZIOboQkEg.tGGY5guP7fCwAwQLpvTvcqLu_wPHIAts5J0ar6KfDUUg.PNG.cjstks112%2F%25B0%25A1%25BF%25C0%25B3%25AA%25BD%25C3-2.png&type=sc960_832" alt="가오나시">
-                        </div>
-                        <span class="userName">면정</span>
-                    </div>
-            </tr>
-        </table>
-        </div>
     </div>
-
-
+    <div id="view">
+        <button id="largeView"><i class="material-icons">check_box_outline_blank</i>
+        </button>
+        <button id="gridView"><i class="material-icons">grid_view</i></button>
+        <button id="listView"><i class="material-icons">reorder</i></button>
+    </div>
+    <div class="post">
+    <table id="list">
+        <tbody>
+            <tr th:each="post : ${postList}">
+                <td><div id="postDate" th:text="${#dates.format(post.regDate,'yyyy-MM-dd')}"></div></td>
+                <td><div><img class="uploadPhoto" src=""></div></td>
+                <td><div class="title" th:text="${post.title}"></div></td>
+                <td><div class="userinfo">
+                    <div class="imageContainer">
+                        <img class="userImage" src="">
+                    </div>
+                    <span class="userName" th:text="${post.name}"></span>
+                </div></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
 </body>
-
 </html>
