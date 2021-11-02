@@ -5,29 +5,31 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class PostForm {
 
-    private Long id;
-
     @NotBlank(message = "로그인 필요")
     private String userId;
 
-    @NotBlank(message = "이름을 비워둘 수 없습니다.")
-    private String name;
-
-    @Size(min=1,max=100)
+    @Size(min=1,max=50)
     private String title;
 
     @NotBlank(message = "날짜 지정이 필요합니다.")
-    private Date regDate;
+    private LocalDate regDate;
 
     @Size(min=1)
     private String contents;
 
-    private Long categoryId;
+    public PostForm(){}
+
+    public PostForm(String userId, String title, LocalDate regDate, String contents) {
+        this.userId = userId;
+        this.title = title;
+        this.regDate = regDate;
+        this.contents = contents;
+    }
 
 }

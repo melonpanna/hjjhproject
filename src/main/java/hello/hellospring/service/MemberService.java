@@ -1,16 +1,15 @@
 package hello.hellospring.service;
 
-import hello.hellospring.controller.MemberForm;
-import hello.hellospring.domain.Category;
+import hello.hellospring.domain.MemberForm;
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.CategoryRepository;
 import hello.hellospring.repository.MemberRepository;
-//import hello.hellospring.repository.MemoryMemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
+@Service
 @Transactional
 public class MemberService implements UserDetailsService {
 
@@ -28,8 +27,8 @@ public class MemberService implements UserDetailsService {
 
     //repository
     private final MemberRepository memberRepository;                  ////////
-    private CategoryRepository categoryRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {                  ////////
         this.memberRepository = memberRepository;
     }
@@ -43,8 +42,9 @@ public class MemberService implements UserDetailsService {
     //권한부여 해야되낭??
     @Override
     public Member loadUserByUsername(String userId) throws UsernameNotFoundException {
-        return memberRepository.findByUserId(userId)
-                .orElseThrow(() -> new UsernameNotFoundException((userId)));
+//        return memberRepository.findByUserId(userId)
+//                .orElseThrow(() -> new UsernameNotFoundException((userId)));
+        return memberRepository.findByUserId(userId);
     }
 
     /**
@@ -55,35 +55,29 @@ public class MemberService implements UserDetailsService {
 
         Member member=Member.builder()
                 .name(memberForm.getName())
-                .userId(memberForm.getUserId())
+                .userid(memberForm.getUserId())
                 .email(memberForm.getEmail())
                 .birth(memberForm.getBirth())
                 .auth("ROLE_USER").build();
 
-        //같은 id가 있는 중복 회원x
-        if(validateDuplicateMember(member)){
-            logger.info("중복 회원" + member.getUsername());        //
-//            m-> {
-                throw new IllegalStateException("이미 존재하는 아이디입니다.");
-//            }
-        }
+//        //같은 id가 있는 중복 회원x
+//        if(validateDuplicateMember(member)){
+//            logger.info("중복 회원" + member.getUsername());        //
+////            m-> {
+//                throw new IllegalStateException("이미 존재하는 아이디입니다.");
+////            }
+//        }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        member.setPassword(encoder.encode(memberForm.getPassword()));
+        member.setPassword(encoder.encode(memberForm.getPassword()));       //password 암호화
 
         logger.info("new password : "+member.getPassword());
         logger.info("Save : " + member.getUsername());
-        member=memberRepository.save(member);//중복회원이 아닐 경우 저장
-        logger.info("Save id : " + member.getId());
+        Long saveId=memberRepository.save(member);//중복회원이 아닐 경우 저장
+        logger.info("Save id : " + saveId);
 
-        //category 추가
-//        Category category = Category.builder()
-//                .id(member.getId())
-//                .userId(member.getUsername())
-//                .build();
-//        categoryRepository.save(category);
-        return member.getId();                                         ////////
+        return saveId;
     }
 
     //유효성 check
@@ -98,32 +92,19 @@ public class MemberService implements UserDetailsService {
         return validatorResult;
     }
 
-    //중복체크
-    private boolean validateDuplicateMember(Member member) {
-        //name 중복 검사
-//        memberRepository.findByName(member.getName())
-//                .ifPresent(m->{
-//                    System.out.println("실패");
-//                   // throw new IllegalStateException("이미 존재하는 회원입니다.");
-//                });
-
-
-        //id 중복 검사
-        Optional<Member> result =
-                memberRepository.findByUserId(member.getUsername());
-
-
-        if(result.isPresent()){
-            return true;
-        }else{
-            return false;
-        }
-
-//        memberRepository.findByUser(member.getUser())
-//                .ifPresent(m->{
-//                    throw new IllegalStateException("이미 존재하는 아이디입니다.");
-//                });
-    }
+//    //중복체크
+//    private boolean validateDuplicateMember(Member member) {
+//
+//        //id 중복 검사
+////        Optional<Member> result =memberRepository.findByUserId(member.getUsername());
+//        Member findMember = memberRepository.findByUserId(member.getUsername());
+//
+//        if(findMember){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
     /**
      * 전체 회원 조회
      */
@@ -138,20 +119,19 @@ public class MemberService implements UserDetailsService {
  */
 
     /*
-    회원정보 수정
+    회원정보 수정(영속성 컨텍스트 자동 변경)
+    <password, name 만 변경 가능하도록 함>
      */
 
-    public Long update(MemberForm memberForm){
+    @Transactional
+    public void update(MemberForm memberForm){
         Member mem=loadUserByUsername(memberForm.getUserId());
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         mem.setPassword(encoder.encode(memberForm.getPassword()));
         mem.setName(memberForm.getName());
-//        mem.setBirth(memberForm.getBirth());
 
         logger.info("new password : "+mem.getPassword());
-        memberRepository.save(mem);
-        return mem.getId();
     }
 }

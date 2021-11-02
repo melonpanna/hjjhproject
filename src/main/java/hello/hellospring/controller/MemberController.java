@@ -1,12 +1,12 @@
 package hello.hellospring.controller;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.domain.MemberForm;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -48,6 +47,11 @@ public class MemberController {
     }
 
 
+//    @GetMapping("/join")
+//    public String createForm(MemberForm memberForm){
+//        return "join";
+//    }
+
     @GetMapping("/join")
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
@@ -62,12 +66,12 @@ public class MemberController {
 
         if (result.hasErrors()) {   //create 실패
 
-            logger.info("binding result={}",result);            
+            logger.info("binding result={}",result);            //
 
             return "join";
         }
 
-        //memberService클래스의 join메서드를 실행(중복검사+정보저장)
+        //memberService클래스의 join메서드를 실행한다.(중복검사+정보저장)
         memberService.join(memberForm);         //memberService클래스의 join메서드를 실행한다.(중복검사+정보저장)
         return "redirect:/";
         //회원가입이 끝나고 리다이렉트로 홈화면으로 되돌아간다.
@@ -78,12 +82,12 @@ public class MemberController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/";
     }
-    
     /**
      *회원조회
      */
     @GetMapping("/myPage")
-    public String list(Model model, Authentication authentication){ //모델은 HashMap 형태를 갖고 있으므로 key값과 value값처럼 사용할 수 있다
+    public String myPage(Model model, Authentication authentication){ //모델은 HashMap 형태를 갖고 있으므로 key값과 value값처럼 사용할 수 있다
+//        UserDetails details=(UserDetails)authentication.getPrincipal();
         Member details=(Member)authentication.getPrincipal();
         model.addAttribute("author",details.getUsername());
         model.addAttribute("name", details.getName());

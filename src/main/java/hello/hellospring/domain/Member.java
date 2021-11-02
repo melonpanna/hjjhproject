@@ -1,6 +1,8 @@
 package hello.hellospring.domain;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,48 +11,51 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.Set;
 
+@Getter @Setter
 @DynamicInsert  //null field 제외
 @Entity //jpa가 관리하는 엔티티
 public class Member implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",insertable = false,nullable = false)
+    @Column(name = "member_id",insertable = false, nullable = false)
     private Long id;        //
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "userid", unique = true)
-//    private String user;
-    private String userId;
+
+    @Column(name = "userid")
+//    @Column(name = "userid", unique = true)
+    private String userid;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name="birth")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date birth;
+    private LocalDate birth;
 
     @Column(name = "auth")
     private String auth;
 
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
     @Builder
-    public Member(String name, String userId, String email, Date birth, String auth) {
-        this.name=name;
-        this.userId = userId;
-        this.email=email;
+    public Member(String name, String userid, String email, LocalDate birth, String auth) {
+        this.name = name;
+        this.userid = userid;
+        this.email = email;
         this.birth = birth;
-        this.auth=auth;
+        this.auth = auth;
     }
 
     public Member(){}
@@ -65,32 +70,11 @@ public class Member implements UserDetails {
         return roles;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    //number
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     //userId 반환
     //사용자의 unique한 값을 반환
     @Override
     public String getUsername() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+        return userid;
     }
 
     //pw
@@ -123,24 +107,8 @@ public class Member implements UserDetails {
         return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setBirth(Date date){
-        this.birth =date;
-    }
-
-    public String getDate(String date){
-        return date;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
 }

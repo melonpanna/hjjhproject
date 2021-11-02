@@ -1,46 +1,54 @@
 package hello.hellospring.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import hello.hellospring.domain.Category;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-//@Table(name="post")
-@Table(name="bufpost")
-
+@Table(name="post")
 public class Post {
 
     @Id
     @GeneratedValue
+    @Column(name="post_id")
     private Long id;
 
-//    @Min(value=1)
-//    private Long category_id;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "member_id") //join되는 column 이름
+    private Member member;
 
-//    @ManyToOne
-//    @JoinColumn(name="category_id")
-//    private Category category;
+    @Column(name = "reg_date")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate regDate;
 
-    @Column
-    private String name;    //작성자 이름
+//    @Column
+//    private String name;    //작성자 이름
 
     @Size(min=1,max=100)
     @Column(name="title", nullable = false)
     private String title;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @Column(name="regDate")
-    private Date regDate;
-
     @Column
     private String contents;
 
+    //==생성 메서드==//
+    public static Post createPost(Member member, String title, String contents, LocalDate localDate) {
+        Post post = new Post();
+        post.setMember(member);
+        post.setTitle(title);
+        post.setContents(contents);
+        post.setRegDate(localDate);
+
+        return post;
+    }
+
+    protected Post() {}
 }
