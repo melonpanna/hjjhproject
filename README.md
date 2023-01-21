@@ -2,6 +2,7 @@
 
 ### 기술 스택
 - Backend : **Spring Boot 2.5.3, Spring Security**
+- Frontend : Vanilla Javascript
 - Database : **H2 database**
 - Tool : **Intellij IDEA**
 
